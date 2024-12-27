@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+     <style>
+        body{
+            background-color: ;
+            color:;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            background: linear-gradient(to bottom,brown,white);
+        }
+        .main{
+            background-color:white;
+            height: 400px;
+            width: 400px;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 250px;
+            background: linear-gradient(to bottom,red,brown,black
+            );
+
+        }
+     </style>
+</head>
+<body>
+    <div class="main">
+       <form action="../upload_file" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file" class="input">
+        <button type="submit" class="btn">
+            add file</button>
+       </form>
+    </div>
+</body>
+</html>
