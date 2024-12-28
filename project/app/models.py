@@ -9,5 +9,5 @@ class users(models.Model):
 
 class files(models.Model):
     file=models.FileField()
-   
+    user=models.ForeignKey(users,on_delete=models.CASCADE)
 

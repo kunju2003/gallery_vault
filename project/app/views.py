@@ -18,6 +18,7 @@ def log(request):
        username=request.POST['username']   
        password=request.POST['password']
        user=auth.authenticate(username=username,password=password)
+       print(user)
        if user is not None:
            auth.login(request,user)
            return redirect(upload_file)
@@ -26,12 +27,12 @@ def log(request):
     return render(request,'login.html')
 
 
-# def home(request):
-#     if '_auth_user_id' in request.session:
-#         user=User.objects.get(pk=request.session['_auth_user_id'])
-#         return render(request,'home.html',{'user':user})
-#     else:
-#         return redirect(log)    
+def home(request):
+    if '_auth_user_id' in request.session:
+        user=User.objects.get(pk=request.session['_auth_user_id'])
+        return render(request,'home.html',{'user':user})
+    else:
+        return redirect(log)    
 
 
     
@@ -45,13 +46,11 @@ def logout(request):
 def upload_file(request):
     photo=files.objects.all()
     rev=reversed(list(photo))
-    if '_auth_user_id' in request.session:
-        user=User.objects.get(pk=request.session['_auth_user_id'])
-
+    
     if request.method=='POST':
         filename=request.FILES['file']
         data=files.objects.create(file=filename)
         data.save()
-        return render(request,'home.html',{'photo':rev,'user':user})
-    else:
-        return redirect(log)    
+        return redirect(upload_file)
+    return render(request,'home.html')
+   
